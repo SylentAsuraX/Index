@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hypercar Legends</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      display: flex;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark-mode #modeToggle {
+      background: #333;
+      color: white;
+    }
+    body.dark-mode .card {
+  background: rgba(30, 30, 30, 0.9);
+  color: #e0e0e0; /* Make sure this is still here */
+  box-shadow: 0 4px 10px rgba(255,255,255,0.1);
+}
+    /* === SIDEBAR === */
+    .sidebar {
+      width: 60px;
+      background-color: black;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      z-index: 999;
+    }
+
+    .sidebar a {
+      text-decoration: none;
+      color: white;
+      font-size: 1.5rem;
+      margin: 1rem 0;
+      transition: transform 0.3s;
+    }
+
+    .sidebar a:hover {
+      transform: scale(1.5);
+    }
+
+    .container {
+      flex: 1;
+    }
+
+    nav {
+      background: black;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a {
+  position: relative;
+  overflow: hidden;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+    #modeToggle {
+      background: white;
+      color: black;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    
+    
+
+    #modeToggle:hover {
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .hero {
+      background: url('https://images.unsplash.com/photo-1621961455004-d2eaeaeeb902?auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+      height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .hero-box {
+      background: rgba(0,0,0,0.6);
+      padding: 2rem;
+      border-radius: 75px;
+
+animation: rotateBorder 5s linear infinite, pulseGlow 2s ease-in-out infinite;
+
+    }
+
+
+.hero-box h1 {
+  position: relative;
+  display: inline-block;
+  border-radius: 20px;
+  overflow: hidden;
+  color: white;
+}
+
+.hero-box h1::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.6) 50%, transparent 100%);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+
+}
+    section {
+      padding: 4rem 2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.6s ease-out forwards;
+      animation-delay: 0.2s;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .brands {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  justify-content: center; /* centers the grid items horizontally */
+  padding: 0 2rem; /* optional padding */
+  max-width: 1200px; /* limits total width */
+  margin: 0 auto; /* centers the container itself */
+}
+
+
+    .card {
+      
+      background: rgba(255,255,255,0.9);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(10px);
+  color: black; /* ADD THIS */
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 1rem;
+    }
+    .card-link{
+      text-decoration: none;
+  color: inherit;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      border: none;
+    }
+    .image-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.image-container img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s ease;
+}
+
+.default-img {
+  opacity: 1;
+  z-index: 1;
+}
+
+.hover-img {
+  opacity: 0;
+  z-index: 2;
+}
+
+.card:hover .default-img {
+  opacity: 0;
+}
+
+.card:hover .hover-img {
+  opacity: 1;
+}
+
+    .about, .contact {
+      text-align: center;
+      max-width: 800px;
+      margin: auto;
+      border: none;
+    }
+
+    .contact input,
+.contact textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin: 0.75rem 0;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.contact input:focus,
+.contact textarea:focus {
+  outline: none;
+  border-color: #0077ff;
+  box-shadow: 0 0 10px rgba(0, 119, 255, 0.4);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+
+    .contact button {
+  background: linear-gradient(135deg, #000, #333);
+  color: white;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background 0.3s ease, transform 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.contact button:hover {
+  background: linear-gradient(135deg, #111, #555);
+  transform: translateY(-5px);
+}
+
+body.dark-mode .contact button {
+  background: linear-gradient(135deg, #6151401f, #d0979874);
+  color: white;
+}
+
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav a {
+        margin: 0.5rem 0 0 0;
+      }
+
+      .sidebar {
+        display: none;
+      }
+      .brands {
+    grid-template-columns: 1fr !important;
+    padding: 0 1rem;
+  }
+
+  .card {
+    width: 100%;
+  }
+    }
+
+    /* === DARK MODE === */
+    body.dark-mode {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+
+    body.dark-mode nav {
+      background-color: #1e1e1e;
+      color: white;
+    }
+
+    body.dark-mode .hero-box {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    body.dark-mode .card {
+      background: #1e1e1e;
+      color: #e0e0e0;
+      box-shadow: 0 4px 10px rgba(255,255,255,0.1);
+    }
+
+    body.dark-mode .contact input,
+    body.dark-mode .contact textarea {
+      background-color: #2b2b2b;
+      color: white;
+      border-color: #444;
+    }
+
+    body.dark-mode .contact button {
+      background: white;
+      color: black;
+    }
+
+    body.dark-mode footer {
+      background-color: #1e1e1e;
+    }
+    body.dark-mode #searchInput {
+  background: #2a2a2a !important;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.05);
+}
+
+
+    /* Toggle Switch Styling */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 30px;
+      margin-left: 1rem;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0;
+      right: 0; bottom: 0;
+      background-color: #ccc;
+      transition: 0.4s;
+      border-radius: 30px;
+    }
+
+    .slider::before {
+      position: absolute;
+      content: "🌙";
+      height: 24px;
+      width: 24px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      border-radius: 50%;
+      transition: 0.4s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    input:checked + .slider {
+      background-color: #444;
+    }
+
+    input:checked + .slider::before {
+      transform: translateX(30px);
+      content: "☀️";
+    }
+    html{
+        scroll-behavior: smooth;
+    }
+    .btn-submit{
+      padding: 20px 40px;
+    }
+    .news {
+  padding: 4rem 1rem;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.news-card {
+  background: #f9f9f9;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.news-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.news-card:hover {
+  transform: translateY(-6px);
+}
+
+.news-content {
+  padding: 1.5rem;
+}
+
+.news-content h3 {
+  margin: 0 0 0.5rem 0;
+}
+
+.news-content p {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.news-content a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
+
+body.dark-mode .news-card {
+  background: #1e1e1e;
+  color: white;
+}
+
+body.dark-mode .news-content a {
+  color: #66b3ff;
+}
+.card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.wishlist-container {
+  margin-top: 0.5rem;
+}
+
+.wishlist-btn {
+  cursor: pointer;
+  font-size: 1.6rem;
+  transition: transform 0.3s ease;
+}
+
+.wishlist-btn.saved {
+  color: red;
+  transform: scale(1.3);
+}
+.review-box {
+  margin-top: 1rem;
+}
+.review-box textarea {
+  width: 90%;
+  resize: none;
+  padding: 0.5rem;
+  margin-left:16px ;
+  font-size: 15px;
+}
+.review-box button {
+  margin-top: 0.5rem;
+  border-radius: 20px;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+.reviews p {
+  background: #f1f1f1;
+  padding: 4px 8px;
+  margin: 5px 0;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+body.dark-mode .reviews p {
+  background: #2a2a2a;
+}
+#authPanel {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 300px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 4px 0 10px rgba(0,0,0,0.2);
+  z-index: 999;
+  transition: left 0.3s ease;
+  overflow-y: auto;
+}
+body.dark-mode #authPanel {
+  background-color: #1e1e1e;
+  color: #fff;
+}
+.auth-content {
+  padding: 2rem;
+}
+#authClose {
+  cursor: pointer;
+  font-size: 24px;
+  float: right;
+}
+#authPanel.show {
+  left: 64px;
+}
+#authForms input {
+  width: 100%;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+}
+#authForms button {
+  width: 100%;
+  padding: 0.75rem;
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+body.dark-mode #authForms button {
+  background: white;
+  color: black;
+}
+  </style>
+</head>
+<body>
+
+<!-- Auth Panel -->
+<div id="authPanel">
+  <div class="auth-content">
+    <span id="authClose" title="Close">&times;</span>
+    <h2>Welcome</h2>
+    <div id="authForms">
+      <form id="loginForm">
+        <h3>Login</h3>
+        <input type="text" id="loginUser" placeholder="Username" required />
+        <input type="password" id="loginPass" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+      <hr />
+      <form id="signupForm">
+        <h3>Sign Up</h3>
+        <input type="text" id="signupUser" placeholder="Username" required />
+        <input type="password" id="signupPass" placeholder="Password" required />
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<style>
+
+</style>
+<script>
+
+</script>
+
+  <!-- Sidebar with Emoji Icons -->
+  <div class="sidebar">
+    <a href="#brands" title="Brands">🚗</a>
+    <a href="#about" title="About">📜</a>
+    <a href="#contact" title="Contact">📬</a>
+    <a href="#" id="authBtn" title="Login">🔐</a>
+
+  </div>
+
+  <div class="container">
+    <!-- Navbar -->
+    <nav>
+      <div><strong>Hypercar Legends</strong></div>
+      <div>
+        <a href="#brands">Brands</a>
+        <a href="#about">About</a>
+        <a href="#contact">Shop</a>
+        <a href="#">Test Drive</a>
+        <a href="#">Contact</a>
+        <label class="switch">
+          <input type="checkbox" id="modeToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+      <div class="hero-box">
+        <h1 style="font-size: 3rem;">Hypercars</h1>
+        <p style="font-size: 1.25rem; margin-top: 1rem;">Own the Unreachable, now within your grasp.</p>
+      </div>
+    </div>
+
+    <!-- Brands Section -->
+    <section id="brands">
+      <h2 class="section-title">Explore & Reserve Your Dream Machine</h2>
+      <div class="searchwrapper"><input
+  type="text"
+  id="searchInput"
+  placeholder="🔍 Search for your dream car..."
+  style="
+    padding: 0.75rem 1.25rem;
+    width: 100%;
+    max-width: 400px;
+    margin: 1.5rem auto;
+    display: block;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    background: #f3f3f3;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  "
+  onfocus="this.style.background='#fff'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.15)';"
+  onblur="this.style.background='#f3f3f3'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';"/>
+
+      <div class="brands">
+
+  <!-- 1 -->
+  <div class="card" data-name="Bugatti">
+    <div class="image-container">
+      <a href="#"><img class="default-img" src="01 BUGATTI_Chiron-Profilee_auction.jfif" alt="Default Car">
+      <img class="hover-img" src="12 BUGATTI_Roadster_launch-set.jfif" alt="Hover Car"></a>
+    </div>
+    <a href="#" class="card-link">
+      <div class="card-content">
+        <h3>Bugatti</h3>
+        <p>Legendary French craftsmanship meets record-breaking speed. Reserve the Chiron Super Sport now.</p>
+      </div>
+    </a>
+    <div class="review-box">
+  <textarea placeholder="Write a comment..." rows="2"></textarea>
+  <button class="submit-review">Post</button>
+  <div class="reviews"></div>
+</div>
+    <span class="wishlist-btn" data-name="Bugatti">🤍</span>
+  </div>
+
+  <!-- 2 -->
+  <div class="card" data-name="Koenigsegg">
+    <div class="image-container">
+      <a href="Koenigsegg.html" class="card-link"><img class="default-img" src="l-intro-1736971027.jpg" alt="Default Car">
+      <img class="hover-img" src="480075-la-koenigsegg-jesko-a-4-millions-est-enfin-prete.jpg" alt="Hover Car">
+    </div>
+    
+      <div class="card-content">
+        <h3>Koenigsegg</h3>
+        <p>Precision-engineered in Sweden. Experience the Jesko Absolut — inquire for availability.</p>
+        
+      </div>
+    </a>
+    <div class="review-box">
+  <textarea placeholder="Write a comment..." rows="2"></textarea>
+  <button class="submit-review">Post</button>
+  <div class="reviews"></div>
+    </div>
+    <span class="wishlist-btn" data-name="Koenigsegg">🤍</span>
+  </div>
+
+  <!-- 3 -->
+  <div class="card" data-name="Pagani">
+    <div class="image-container">
+      <a href="Pagani.html"><img class="default-img" src="Pagani-Huayra-R-Evo-Front-view.jpg" alt="Default Car">
+      <img class="hover-img" src="pagani-huayra-nc-front-corner.jpg" alt="Hover Car"></a>
+    </div>
+    <a href="Pagani.html" class="card-link">
+      <div class="card-content">
+        <h3>Pagani</h3>
+        <p>Italian artistry fused with raw power. Discover the Huayra R and book a private consultation.</p>
+      </div>
+    </a>
+    <div class="review-box">
+  <textarea placeholder="Write a comment..." rows="2"></textarea>
+  <button class="submit-review">Post</button>
+  <div class="reviews"></div>
+</div>
+    <span class="wishlist-btn" data-name="Pagani">🤍</span>
+  </div>
+
+  <!-- 4 -->
+  <div class="card" data-name="BMW">
+    <div class="image-container">
+      <a href="#"><img class="default-img" src="car-3322135_640.jpg" alt="BMW">
+      <img class="hover-img" src="bmv_m4_f82_3d_model_c4d_max_obj_fbx_ma_lwo_3ds_3dm_stl_5176239.png" alt="BMW other"></a>
+    </div>
+    <a href="#" class="card-link">
+      <div class="card-content">
+        <h3>BMW</h3>
+        <p>For sale: BMW M8 Competition. Twin-turbo V8, 625 HP — performance meets prestige. Reserve now.</p>
+      </div>
+    </a>
+    <div class="review-box">
+  <textarea placeholder="Write a comment..." rows="2"></textarea>
+  <button class="submit-review">Post</button>
+  <div class="reviews"></div>
+</div>
+    <span class="wishlist-btn" data-name="BMW">🤍</span>
+  </div>
+
+  <!-- 5 -->
+  <div class="card" data-name="McLaren">
+    <div class="image-container">
+      <a href="#"><img class="default-img" src="Original-16850-mclaren-w1-front-3-4-high-black.webp" alt="McLaren Default">
+      <img class="hover-img" src="McLaren_Senna_IMG_3279.jpg" alt="McLaren Hover"></a>
+    </div>
+    <a href="#" class="card-link">
+      <div class="card-content">
+        <h3>McLaren</h3>
+        <p>The Speedtail — futuristic design with 250+ mph performance. Experience McLaren's vision.</p>
+      </div>
+    </a>
+    <div class="review-box">
+  <textarea placeholder="Write a comment..." rows="2"></textarea>
+  <button class="submit-review">Post</button>
+  <div class="reviews"></div>
+</div>
+    <span class="wishlist-btn" data-name="McLaren">🤍</span>
+  </div>
+
+  <!-- 6 -->
+  <div class="card" data-name="Rolls-Royce">
+    <div class="image-container">
+      <a href="#"><img class="default-img" src="64bad4c203c40c001a9840af.webp" alt="Rimac Default">
+      <img class="hover-img" src="2024-Rolls-Royce-Spectre-1-scaled.jpg" alt="Rimac Hover"></a>
+    </div>
+    <a href="#" class="card-link">
+      <div class="card-content">
+        <h3>Rolls-Royce</h3>
+        <p>Unrivaled luxury and timeless elegance. Commission your bespoke Rolls-Royce today.</p>
+      </div>
+    </a>
+    <div class="review-box">
+  <textarea placeholder="Write a comment..." rows="2"></textarea>
+  <button class="submit-review">Post</button>
+  <div class="reviews"></div>
+</div>
+    <span class="wishlist-btn" data-name="Rolls-Royce">🤍</span>
+  </div>
+
+  <!-- 7 -->
+  <div class="card" data-name="Ferrari">
+    <div class="image-container">
+      <a href="#"><img class="default-img" src="Ferrari_F8_Tributo_Genf_2019_1Y7A5665.jpg" alt="Ferrari Default">
+      <img class="hover-img" src="Ferrari_SF90_XX_Stradale_GIF_1024x1024.webp" alt="Ferrari Hover"></a>
+    </div>
+    <a href="#" class="card-link">
+      <div class="card-content">
+        <h3>Ferrari</h3>
+        <p>Hybrid performance meets heritage. The SF90 Stradale is Ferrari’s evolution of innovation.</p>
+      </div>
+    </a>
+    <div class="review-box">
+  <textarea placeholder="Write a comment..." rows="2"></textarea>
+  <button class="submit-review">Post</button>
+  <div class="reviews"></div>
+</div>
+    <span class="wishlist-btn" data-name="Ferrari">🤍</span>
+  </div>
+
+  <!-- 8 -->
+  <div class="card" data-name="Lamborghini">
+    <div class="image-container">
+      <a href="#"><img class="default-img" src="photo-1686440706407-17ab9d4578ed.jfif" alt="Lambo Default">
+      <img class="hover-img" src="vlcsnap-2023-03-17-16h18m30s840.jpg" alt="Lambo Hover"></a>
+    </div>
+    <a href="#" class="card-link">
+      <div class="card-content">
+        <h3>Lamborghini</h3>
+        <p>Feel the rage of the V12. The Revuelto pushes Lamborghini into the electrified hypercar future.</p>
+      </div>
+    </a>
+    <div class="review-box">
+  <textarea placeholder="Write a comment..." rows="2"></textarea>
+  <button class="submit-review">Post</button>
+  <div class="reviews"></div>
+</div>
+    <span class="wishlist-btn" data-name="Lamborghini">🤍</span>
+  </div>
+
+  <!-- 9 -->
+  <div class="card" data-name="Porsche">
+    <div class="image-container">
+      <a href="#"><img class="default-img" src="Porsche-Panamera-GTS.webp" alt="Porsche Default">
+      <img class="hover-img" src="mansory-p9lm-evo-900-porsche-911-turbo-s.jpg" alt="Porsche Hover"></a>
+    </div>
+    <a href="#" class="card-link">
+      <div class="card-content">
+        <h3>Porsche</h3>
+        <p>Precision meets performance. Explore the Porsche 911 and reserve your drive today.</p>
+      </div>
+    </a>
+    <div class="review-box">
+  <textarea placeholder="Write a comment..." rows="2"></textarea>
+  <button class="submit-review">Post</button>
+  <div class="reviews"></div>
+</div>
+    <span class="wishlist-btn" data-name="Porsche">🤍</span>
+  </div>
+
+</div>
+
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <h2 class="section-title">About</h2>
+      <p>
+    Each car is handpicked for those who demand more than transportation: a masterpiece to own.
+      </p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+      <h2 class="section-title">Contact Us</h2>
+      <p>Interested in booking a test drive, private viewing, or placing an order?</p>
+      <form>
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Your Email" required />
+        <textarea placeholder="What model are you Interested in?" rows="5" required></textarea>
+        <div class="btn-submit"><button type="submit">Send Message</button></div>
+      </form>
+    </section>
+
+    <!-- Blog / News Section -->
+<section id="news" class="news">
+  <h2 class="section-title">Latest News & Articles</h2>
+  <div class="news-grid">
+
+    <!-- Blog Post 1 -->
+    <article class="news-card" data-aos="fade-up">
+      <img src="blog1.jpg" alt="Chiron Successor Teased">
+      <div class="news-content">
+        <h3>Bugatti Teases Chiron Successor</h3>
+        <p>Bugatti reveals first glimpse of its next-gen hypercar, hinting at hybrid power and even more speed.</p>
+        <a href="#">Read More →</a>
+      </div>
+    </article>
+
+    <!-- Blog Post 2 -->
+    <article class="news-card" data-aos="fade-up" data-aos-delay="100">
+      <img src="blog2.jpg" alt="Pagani Huayra R Evo">
+      <div class="news-content">
+        <h3>Pagani Huayra R Evo Launch</h3>
+        <p>Pagani stuns the world again with an upgraded Huayra R Evo featuring 900+ HP and a radical aero kit.</p>
+        <a href="#">Read More →</a>
+      </div>
+    </article>
+
+    <!-- Blog Post 3 -->
+    <article class="news-card" data-aos="fade-up" data-aos-delay="200">
+      <img src="blog3.jpg" alt="Koenigsegg Jesko Track Time">
+      <div class="news-content">
+        <h3>Koenigsegg Jesko Sets Track Record</h3>
+        <p>Swedish beast shatters lap records at Nürburgring—Jesko Absolut now in elite performance territory.</p>
+        <a href="#">Read More →</a>
+      </div>
+    </article>
+
+    <!-- Blog Post 4 -->
+    <article class="news-card" data-aos="fade-up" data-aos-delay="200">
+      <img src="blog3.jpg" alt="Koenigsegg Jesko Track Time">
+      <div class="news-content">
+        <h3>Koenigsegg Jesko Sets Track Record</h3>
+        <p>Swedish beast shatters lap records at Nürburgring—Jesko Absolut now in elite performance territory.</p>
+        <a href="#">Read More →</a>
+      </div>
+    </article>
+
+    <!-- Blog Post 3 -->
+    <article class="news-card" data-aos="fade-up" data-aos-delay="200">
+      <img src="blog3.jpg" alt="Koenigsegg Jesko Track Time">
+      <div class="news-content">
+        <h3>Koenigsegg Jesko Sets Track Record</h3>
+        <p>Swedish beast shatters lap records at Nürburgring—Jesko Absolut now in elite performance territory.</p>
+        <a href="#">Read More →</a>
+      </div>
+    </article>
+
+    <!-- Blog Post 3 -->
+    <article class="news-card" data-aos="fade-up" data-aos-delay="200">
+      <img src="blog3.jpg" alt="Koenigsegg Jesko Track Time">
+      <div class="news-content">
+        <h3>Koenigsegg Jesko Sets Track Record</h3>
+        <p>Swedish beast shatters lap records at Nürburgring—Jesko Absolut now in elite performance territory.</p>
+        <a href="#">Read More →</a>
+      </div>
+    </article>
+
+    <!-- Blog Post 3 -->
+    <article class="news-card" data-aos="fade-up" data-aos-delay="200">
+      <img src="blog3.jpg" alt="Koenigsegg Jesko Track Time">
+      <div class="news-content">
+        <h3>Koenigsegg Jesko Sets Track Record</h3>
+        <p>Swedish beast shatters lap records at Nürburgring—Jesko Absolut now in elite performance territory.</p>
+        <a href="#">Read More →</a>
+      </div>
+    </article>
+
+    <!-- Blog Post 3 -->
+    <article class="news-card" data-aos="fade-up" data-aos-delay="200">
+      <img src="blog3.jpg" alt="Koenigsegg Jesko Track Time">
+      <div class="news-content">
+        <h3>Koenigsegg Jesko Sets Track Record</h3>
+        <p>Swedish beast shatters lap records at Nürburgring—Jesko Absolut now in elite performance territory.</p>
+        <a href="#">Read More →</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+    <!-- Footer -->
+    <footer>
+      &copy; 2025 Hypercar Legends. All rights reserved.
+    </footer>
+        <div id="glow-orb"></div>
+  </div>
+
+  <!-- Dark Mode Toggle Script -->
+   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  const toggleInput = document.getElementById('modeToggle');
+  if (localStorage.getItem('dark-mode') === 'enabled') {
+    document.body.classList.add('dark-mode');
+    toggleInput.checked = true;
+  }
+
+  toggleInput.addEventListener('change', () => {
+    if (toggleInput.checked) {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('dark-mode', 'enabled');
+    } else {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('dark-mode', 'disabled');
+    }
+  });
+
+  AOS.init();
+
+  // === Search Filter Code ===
+  const searchInput = document.getElementById('searchInput');
+  const cards = document.querySelectorAll('.card');
+
+  searchInput.addEventListener('input', function () {
+    const query = this.value.toLowerCase();
+    cards.forEach(card => {
+      const name = card.getAttribute('data-name').toLowerCase();
+      if (name.includes(query)) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+
+  document.querySelectorAll('.wishlist-btn').forEach(btn => {
+  const name = btn.dataset.name;
+  if (localStorage.getItem(`wish-${name}`) === 'saved') {
+    btn.classList.add('saved');
+    btn.textContent = "❤️";
+  }
+
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('saved');
+    if (btn.classList.contains('saved')) {
+      btn.textContent = "❤️";
+      localStorage.setItem(`wish-${name}`, 'saved');
+    } else {
+      btn.textContent = "🤍";
+      localStorage.removeItem(`wish-${name}`);
+    }
+  });
+});
+
+document.querySelectorAll('.card').forEach(card => {
+  const textarea = card.querySelector('textarea');
+  const button = card.querySelector('.submit-review');
+  const reviewDiv = card.querySelector('.reviews');
+
+  button.addEventListener('click', () => {
+    if (textarea.value.trim()) {
+      const comment = document.createElement('p');
+      comment.textContent = textarea.value.trim();
+      reviewDiv.appendChild(comment);
+      textarea.value = "";
+    }
+  });
+});
+
+document.getElementById("authBtn").addEventListener("click", () => {
+  document.getElementById("authPanel").classList.add("show");
+});
+document.getElementById("authClose").addEventListener("click", () => {
+  document.getElementById("authPanel").classList.remove("show");
+});
+
+// Login/Signup Demo
+document.getElementById("signupForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const user = document.getElementById("signupUser").value;
+  const pass = document.getElementById("signupPass").value;
+  localStorage.setItem("user", JSON.stringify({ user, pass }));
+  alert("Signup successful!");
+});
+
+document.getElementById("loginForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const user = document.getElementById("loginUser").value;
+  const pass = document.getElementById("loginPass").value;
+  const stored = JSON.parse(localStorage.getItem("user"));
+  if (stored && stored.user === user && stored.pass === pass) {
+    alert(`Welcome back, ${user}!`);
+    document.getElementById("authPanel").classList.remove("show");
+  } else {
+    alert("Invalid credentials");
+  }
+});
+</script>
+
+
+</body>
+</html>
+
+
+

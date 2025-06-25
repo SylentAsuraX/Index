@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Explore Pagani - the fusion of speed, art, and engineering. Discover Huayra, Zonda, and more." />
+  <title>Pagani | Hypercars Redefined</title>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Open+Sans&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: #111;
+      color: white;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+    }
+
+    nav a {
+      position: relative;
+      color: white;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      padding-bottom: 4px;
+      transition: color 0.3s ease;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 2px;
+      width: 0;
+      background: white;
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      background: url('https://cdn.carbuzz.com/gallery-images/1600/1038000/700/1038725.jpg') no-repeat center center/cover;
+      height: 90vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      font-family: 'Cinzel', serif;
+      color: white;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 1rem 2rem;
+      border-radius: 10px;
+    }
+
+    .section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: #222;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card h3 {
+      font-family: 'Cinzel', serif;
+      padding: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .card p {
+      padding: 0 1rem 1rem;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    footer {
+      background: #000;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    #contact {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .contact-form {
+      max-width: 500px;
+      margin: 1rem auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 0.75rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .contact-form button {
+      background-color: #007bff;
+      color: white;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .contact-form button:hover {
+      background-color: #0056b3;
+    }
+    .card p strong {
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.card button {
+  margin: 0 1rem 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.card button:hover {
+  background-color: #e64a19;
+}
+.slide-panel {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 400px;
+  height: 100%;
+  background-color: #1a1a1a;
+  color: white;
+  padding: 2rem;
+  overflow-y: auto;
+  transition: right 0.5s ease;
+  z-index: 999;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.slide-panel img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.slide-panel h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
+}
+
+.slide-panel p {
+  margin-bottom: 0.5rem;
+  color: #ccc;
+}
+
+.slide-panel button {
+  background-color: #ff5722;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.slide-panel button:hover {
+  background-color: #e64a19;
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Pagani</h1>
+    <nav>
+      <a href="#models">Models</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2 data-aos="fade-up">Where Art Meets Speed</h2>
+  </section>
+
+  <section id="models" class="section">
+  <h2 data-aos="fade-right">Our Hypercars</h2>
+  <div class="card-container">
+    <div class="card" data-aos="fade-up">
+      <img src="Pagani-Huayra-2-1-web.jpg" alt="Pagani Huayra" />
+      <h3>Pagani Huayra</h3>
+      <p>Powered by a Mercedes-AMG V12, the Huayra redefines aerodynamic beauty and luxury.</p>
+      <p><strong>₹18 Cr</strong> <span style="color: #0f0;">20% OFF</span></p>
+      <button>Buy Now</button>
+    </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="100">
+      <img src="492502250_1098854908936570_2180015193796497404_n copy.jpg" alt="Pagani Zonda" />
+      <h3>Pagani Zonda</h3>
+      <p>The legendary Zonda delivers raw performance with iconic design — a true collector’s dream.</p>
+      <p><strong>₹14 Cr</strong> <span style="color: #0f0;">15% OFF</span></p>
+      <button>Buy Now</button>
+    </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="150">
+      <img src="POCHK120.png" alt="Pagani Utopia" />
+      <h3>Pagani Utopia</h3>
+      <p>The latest masterpiece fuses futuristic lines with timeless craftsmanship and power.</p>
+      <p><strong>₹21 Cr</strong> <span style="color: #0f0;">10% OFF</span></p>
+      <button>Buy Now</button>
+    </div>
+    <!-- New 6 Boxes Below -->
+    <div class="card" data-aos="fade-up" data-aos-delay="300">
+      <img src="2022-Pagani-Huayra-R_1293752.webp" alt="Pagani Huayra R" />
+      <h3>Pagani Huayra R</h3>
+      <p>Track-focused and engineered for adrenaline. The Huayra R is raw and extreme.</p>
+      <p><strong>₹23 Cr</strong> <span style="color: #0f0;">12% OFF</span></p>
+      <button>Buy Now</button>
+    </div>
+
+
+    <div class="card" data-aos="fade-up" data-aos-delay="400">
+      <img src="thumb_1482.jpg" alt="Pagani Zonda Cinque" />
+      <h3>Zonda Cinque</h3>
+      <p>Limited to five units, the Cinque is the rarest blend of art and speed on Earth.</p>
+      <p><strong>₹25 Cr</strong> <span style="color: #0f0;">5% OFF</span></p>
+      <button>Buy Now</button>
+    </div>
+
+    <div class="card" data-aos="fade-up" data-aos-delay="500">
+      <img src="2013_Pagani_ZondaRevolucion-0-1024.jpg" alt="Pagani Zonda Revolución" />
+      <h3>Zonda Revolución</h3>
+      <p>The absolute limit of performance, crafted for those who dare to tame it.</p>
+      <p><strong>₹27 Cr</strong> <span style="color: #0f0;">8% OFF</span></p>
+      <button>Buy Now</button>
+    </div>
+
+    <div class="card" data-aos="fade-right" data-aos-delay="600">
+      <img src="Pagani-Zonda-HP-Barchetta.webp" alt="Zonda HP Barchetta" />
+      <h3>HP Barchetta</h3>
+      <p>Horacio’s personal touch — the Barchetta is elegance and exclusivity combined.</p>
+      <p><strong>₹28 Cr</strong> <span style="color: #0f0;">7% OFF</span></p>
+      <button>Buy Now</button>
+    </div>
+    
+    <div class="card" data-aos="fade-up" data-aos-delay="700">
+      <img src="Render-Pagani-Imola-Roadster-03-HD.jpg" alt="Pagani Imola" />
+      <h3>Pagani Imola</h3>
+      <p>The most powerful Pagani ever, pushing boundaries on every road and track.</p>
+      <p><strong>₹26 Cr</strong> <span style="color: #0f0;">18% OFF</span></p>
+      <button>Buy Now</button>
+    </div>
+
+    <div class="card" data-aos="fade-left" data-aos-delay="700">
+      <img src="Pagani_Zonda_Diamante_Verde-1.jpg" alt="Pagani Imola" />
+      <h3>Pagani Zonda 760 Series</h3>
+      <p>The Zonda 760 series is a collection of ultra-exclusive, one-off or very limited edition Zondas built specifically for individual clients.</p>
+      <p><strong>₹29.4 Cr</strong> <span style="color: #0f0;">18% OFF</span></p>
+      <button>Buy Now</button>
+    </div>
+
+  </div>
+</section>
+<div id="detailPanel" class="slide-panel">
+  <span class="close-btn" onclick="closePanel()">×</span>
+  <img id="panelImage" src="" alt="Car Image">
+  <h2 id="panelTitle"></h2>
+  <p id="panelDesc"></p>
+  <p id="panelPrice"></p>
+  <hr style="margin: 1rem 0;">
+  <p><strong>Engine:</strong> Twin-Turbo V12</p>
+  <p><strong>Top Speed:</strong> 350+ km/h</p>
+  <p></p>
+  <button style="margin-top: 1rem;">Confirm Purchase</button>
+</div>
+
+
+  <footer>
+    <p>&copy; 2025 Pagani Automobili. All rights reserved.</p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+     const panel = document.getElementById('detailPanel');
+  const panelTitle = document.getElementById('panelTitle');
+  const panelImage = document.getElementById('panelImage');
+  const panelDesc = document.getElementById('panelDesc');
+  const panelPrice = document.getElementById('panelPrice');
+
+  document.querySelectorAll('.card button').forEach((button) => {
+    button.addEventListener('click', (e) => {
+      const card = e.target.closest('.card');
+      const title = card.querySelector('h3').textContent;
+      const image = card.querySelector('img').src;
+      const desc = card.querySelectorAll('p')[0].textContent;
+      const price = card.querySelectorAll('p')[1].innerHTML;
+
+      panelTitle.textContent = title;
+      panelImage.src = image;
+      panelDesc.textContent = desc;
+      panelPrice.innerHTML = price;
+
+      panel.style.right = '0';
+    });
+  });
+
+  function closePanel() {
+    panel.style.right = '-100%';
+  }
+  </script>
+</body>
+
+</html>

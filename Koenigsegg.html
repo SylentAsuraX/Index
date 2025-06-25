@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Explore Koenigsegg - hypercars for the future. Buy Jesko, Agera, Regera, and more." />
+  <title>Koenigsegg | Own the Speed</title>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Open+Sans&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: #0a0a0a;
+      color: white;
+    }
+
+    header {
+      background: #000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #333;
+    }
+
+    .header_car {
+      color: white;
+      border: solid 1px;
+      padding: 10px 20px;
+      border-radius: 1.5rem;
+      font-size: 1.4rem;
+    }
+
+    nav a {
+      position: relative;
+      color: white;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: bold;
+      padding-bottom: 4px;
+      transition: all 0.3s ease;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 2px;
+      width: 0;
+      background: white;
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      background: url('https://cdn.carbuzz.com/gallery-images/1600/1038000/700/1038725.jpg') no-repeat center center/cover;
+      height: 90vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      font-family: 'Cinzel', serif;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      border: 1px solid #fff;
+    }
+
+    .section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      font-family: 'Cinzel', serif;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: #181818;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      border: 1px solid #333;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card h3 {
+      font-family: 'Cinzel', serif;
+      padding: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .card p {
+      padding: 0 1rem 1rem;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    .card p strong {
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    .card button {
+      margin: 0 1rem 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #ff5722;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .card button:hover {
+      background-color: #e64a19;
+    }
+
+    .slide-panel {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 400px;
+      max-width: 90%;
+      height: 100%;
+      background: #1a1a1a;
+      color: white;
+      padding: 2rem;
+      box-shadow: -4px 0 20px rgba(0, 0, 0, 0.7);
+      transition: right .8s cubic-bezier(0.6, -0.5, 0.2, 1.5);
+      z-index: 999;
+      overflow-y: auto;
+    }
+
+    .slide-panel.active {
+      right: 0;
+    }
+
+    .slide-panel img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+
+    .slide-panel h3 {
+      font-family: 'Cinzel', serif;
+      margin-bottom: 1rem;
+    }
+
+    .slide-panel button.card-btn {
+      width: 100%;
+      margin-top: 1rem;
+      background: #a3a0a0;
+      font-size: 1.2rem;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: white;
+      cursor: pointer;
+    }
+
+    footer {
+      background: #000;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      border-top: 1px solid #333;
+    }
+    .card-btn{
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .card-btn:hover{
+      transform: translateY(-7px);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1 class="header_car">Koenigsegg</h1>
+    <nav>
+      <a href="#models">Models</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2 data-aos="fade-up">Own the Hypercar Dream</h2>
+  </section>
+
+  <section id="models" class="section">
+    <h2 data-aos="fade-right">Choose Your Hypercar</h2>
+    <div class="card-container">
+      <div class="card" data-aos="fade-up">
+      <img src="Koenigsegg-Jesko-Attack-Plus-Green-spec-3.webp" alt="Koenigsegg Jesko" />
+      <h3>Koenigsegg Jesko</h3>
+      <p>Track-bred hypercar with 1600 hp, cutting-edge aerodynamics, and precision.</p>
+      <p><strong>₹23.38 Cr</strong> <span style="color: #0f0;">20% OFF</span></p>
+      <button>Buy Now</button>
+    </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="100">
+      <img src="2015_Koenigsegg_Agera_N_(19886243212).jpg" alt="Koenigsegg Agera RS" />
+      <h3>Koenigsegg Agera RS</h3>
+      <p>Record-breaking speed demon blending engineering marvel and raw power.</p>
+      <p><strong>₹23.80 Cr</strong> <span style="color: #0f0;">15% OFF</span></p>
+      <button>Buy Now</button>
+    </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="200">
+      <img src="Regera_(light_gradient).png" alt="Koenigsegg Regera" />
+      <h3>Koenigsegg Regera</h3>
+      <p>Hybrid luxury hypercar with a direct-drive system and 1500+ hp elegance.</p>
+      <p><strong>₹14.2 Cr</strong> <span style="color: #0f0;">10% OFF</span></p>
+      <button>Buy Now</button>
+    </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="300">
+      <img src="setvqx9jg7ed1.jpeg" alt="Koenigsegg Gemera" />
+      <h3>Koenigsegg Gemera</h3>
+      <p>4-seater hybrid GT redefining family hypercars with revolutionary tech.</p>
+      <p><strong>₹23.80 Cr</strong> <span style="color: #0f0;">12% OFF</span></p>
+      <button>Buy Now</button>
+    </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="400">
+      <img src="CC850-2.webp" alt="Koenigsegg CC850" />
+      <h3>Koenigsegg CC850</h3>
+      <p>Retro-modern tribute with manual-auto gearbox and carbon perfection.</p>
+      <p><strong>₹25 Cr</strong> <span style="color: #0f0;">5% OFF</span></p>
+      <button>Buy Now</button>
+    </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="500">
+      <img src="Large Image_52.jpg" alt="Koenigsegg One:1" />
+      <h3>Koenigsegg One:1</h3>
+      <p>A power-to-weight ratio of 1:1—impossible numbers made real.</p>
+      <p><strong>₹27 Cr</strong> <span style="color: #0f0;">8% OFF</span></p>
+      <button>Buy Now</button>
+    </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="600">
+      <img src="Jesko ABSOULTE.jpg" alt="Koenigsegg Jesko Absolut" />
+      <h3>Koenigsegg Jesko Absolut</h3>
+      <p>Built for top-speed domination—Koenigsegg’s fastest road car yet.</p>
+      <p><strong>₹28 Cr</strong> <span style="color: #0f0;">7% OFF</span></p>
+      <button>Buy Now</button>
+    </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="700">
+      <img src="6273-1.jpg" alt="Koenigsegg CCXR Trevita" />
+      <h3>Koenigsegg CCXR Trevita</h3>
+      <p>Diamond weave carbon fiber and exclusivity beyond measure.</p>
+      <p><strong>₹26 Cr</strong> <span style="color: #0f0;">18% OFF</span></p>
+      <button>Buy Now</button>
+    </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="700">
+      <img src="koenigsegg-one-of-1-agera-final-geneva-motor-show-2016-designboom-01-818x540.jpg" alt="Koenigsegg Agera One of 1" />
+      <h3>Koenigsegg Agera One of 1</h3>
+      <p>A unique bespoke variant symbolizing peak personalization.</p>
+      <p><strong>₹29.4 Cr</strong> <span style="color: #0f0;">18% OFF</span></p>
+      <button>Buy Now</button>
+    </div>
+    </div>
+  </section>
+
+  <div class="slide-panel" id="slidePanel">
+    <button class="close-btn" onclick="closePanel()">&times;</button>
+    <img id="panelImg" src="" alt="Car Image">
+    <h3 id="panelTitle"></h3>
+    <p id="panelDesc"></p>
+    <p id="panelPrice" style="font-weight:bold; font-size: 1.2rem;"></p>
+    <button class="card-btn">Confirm Purchase</button>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Koenigsegg. Designed for buyers. All rights reserved.</p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+    const panel = document.getElementById('slidePanel');
+    const panelImg = document.getElementById('panelImg');
+    const panelTitle = document.getElementById('panelTitle');
+    const panelDesc = document.getElementById('panelDesc');
+    const panelPrice = document.getElementById('panelPrice');
+
+    document.querySelectorAll('.card button').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.card');
+        panelImg.src = card.querySelector('img').src;
+        panelTitle.textContent = card.querySelector('h3').textContent;
+        panelDesc.textContent = card.querySelectorAll('p')[0].textContent;
+        panelPrice.textContent = card.querySelectorAll('p')[1].textContent;
+        panel.classList.add('active');
+      });
+    });
+
+    function closePanel() {
+      panel.classList.remove('active');
+    }
+  </script>
+</body>
+
+</html>
